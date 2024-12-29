@@ -3,6 +3,8 @@ import { ImageUpload } from "@/components/ImageUpload";
 import { PlantInfo } from "@/components/PlantInfo";
 import { Leaf } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   const [isIdentifying, setIsIdentifying] = useState(false);
@@ -39,25 +41,29 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sage-50 to-white px-4 py-12">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12 animate-fade-up">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Leaf className="w-8 h-8 text-sage-600" />
-            <h1 className="text-3xl font-semibold text-gray-900">
-              Plant Identifier
-            </h1>
+    <div className="min-h-screen bg-gradient-to-b from-sage-50 to-white">
+      <Navigation />
+      <div className="px-4 py-24">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12 animate-fade-up">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Leaf className="w-8 h-8 text-sage-600" />
+              <h1 className="text-3xl font-semibold text-gray-900">
+                Plant Identifier
+              </h1>
+            </div>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Upload a photo of any plant and get instant identification along with
+              care instructions.
+            </p>
           </div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Upload a photo of any plant and get instant identification along with
-            care instructions.
-          </p>
+
+          <ImageUpload onImageSelect={identifyPlant} isLoading={isIdentifying} />
+
+          {plantData && <PlantInfo {...plantData} />}
         </div>
-
-        <ImageUpload onImageSelect={identifyPlant} isLoading={isIdentifying} />
-
-        {plantData && <PlantInfo {...plantData} />}
       </div>
+      <Footer />
     </div>
   );
 };
